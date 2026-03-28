@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tânia & Miguel | Convite de Casamento</title>
+    <meta name="description" content="Convite de casamento de Tânia e Miguel - 29 de julho de 2027" />
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero" aria-label="Introdução do convite">
+            <div class="overlay"></div>
+
+            <div class="hero-content">
+                <p class="top-text">Vamos casar</p>
+
+                <h1 class="name first-name">Tânia</h1>
+
+                <div class="ampersand-circle" aria-hidden="true">&amp;</div>
+
+                <h2 class="name second-name">Miguel</h2>
+
+                <div class="date-line" aria-hidden="true">
+                    <span></span>
+                    <span class="star">✦</span>
+                    <span></span>
+                </div>
+
+                <p class="date">
+                    <time datetime="2027-07-29">29 de julho de 2027</time>
+                </p>
+            </div>
+        </section>
+
+        <!-- COUNTDOWN -->
+        <section class="countdown-section" aria-labelledby="countdown-title">
+            <div class="countdown-container">
+                <h2 id="countdown-title">Contagem decrescente</h2>
+                <p class="subtitle">Para o dia mais feliz das nossas vidas</p>
+
+                <div class="countdown-grid">
+                    <div class="countdown-box">
+                        <span id="days">00</span>
+                        <p>Dias</p>
+                    </div>
+
+                    <div class="countdown-box">
+                        <span id="hours">00</span>
+                        <p>Horas</p>
+                    </div>
+
+                    <div class="countdown-box">
+                        <span id="minutes">00</span>
+                        <p>Minutos</p>
+                    </div>
+
+                    <div class="countdown-box">
+                        <span id="seconds">00</span>
+                        <p>Segundos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DETAILS -->
+        <section class="details-section" aria-labelledby="details-title">
+            <div class="details-header">
+                <div class="details-emoji" aria-hidden="true">🥂</div>
+                <h2 id="details-title">Detalhes do dia</h2>
+                <p>Tudo o que precisas de saber</p>
+            </div>
+
+            <article class="details-card">
+                <div class="details-icon-circle" aria-hidden="true">📍</div>
+
+                <h3>Localização</h3>
+                <h4>Quinta Cardeal</h4>
+
+                <p class="details-time">🕒 Das 17:00 às 01:00</p>
+
+                <img src="assets/quinta.jpg" alt="Vista da Quinta Cardeal" class="details-image" />
+
+                <div class="map-box">
+                    <iframe src="https://www.google.com/maps?q=Quinta%20Cardeal&output=embed"
+                            title="Mapa da Quinta Cardeal"
+                            loading="lazy"
+                            allowfullscreen
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <a href="https://www.google.com/maps/search/?api=1&query=Quinta+Cardeal"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="details-button">
+                    <span aria-hidden="true">📍</span>
+                    Abrir no Maps
+                </a>
+
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Casamento%20T%C3%A2nia%20%26%20Miguel&dates=20270729T170000/20270730T010000&details=Esperamos%20por%20ti%20no%20nosso%20grande%20dia!&location=Quinta%20Cardeal"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="details-button">
+                    <span aria-hidden="true">📅</span>
+                    Adicionar ao Google Calendar
+                </a>
+
+                <a href="assets/casamento-tania-miguel.ics"
+                   download
+                   class="details-button">
+                    <span aria-hidden="true">🍎</span>
+                    Adicionar ao Apple Calendar
+                </a>
+            </article>
+        </section>
+
+        <!-- SCHEDULE -->
+        <section class="schedule-section" aria-labelledby="schedule-title">
+            <div class="schedule-divider" aria-hidden="true">
+                <span></span>
+                <span class="schedule-star">✦</span>
+                <span></span>
+            </div>
+
+            <div class="schedule-illustration">
+                <img src="assets/programa-topo.png" alt="Ilustração de convidados numa festa" />
+            </div>
+
+            <div class="schedule-header">
+                <h2 id="schedule-title">Programa do dia</h2>
+                <p>O que preparámos para vocês</p>
+            </div>
+
+            <div class="schedule-timeline">
+                <article class="timeline-item">
+                    <div class="timeline-icon" aria-hidden="true">♡</div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="timeline-time">17:00</div>
+                            <h3>Chegada dos convidados</h3>
+                        </div>
+                        <p>Receção e boas-vindas na quinta</p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-icon" aria-hidden="true">🥂</div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="timeline-time">17:00</div>
+                            <h3>Welcome Drink</h3>
+                        </div>
+                        <p>Cocktail de boas-vindas enquanto aguardamos pelo início</p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-icon" aria-hidden="true">💍</div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="timeline-time">17:00</div>
+                            <h3>Cerimónia</h3>
+                        </div>
+                        <p>O momento do “sim”</p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-icon" aria-hidden="true">🍽️</div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="timeline-time">17:00</div>
+                            <h3>Jantar</h3>
+                        </div>
+                        <p>Jantar servido com muita celebração à mistura</p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-icon" aria-hidden="true">🎂</div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="timeline-time">17:00</div>
+                            <h3>Corte do bolo</h3>
+                        </div>
+                        <p>Um dos momentos mais doces da noite</p>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-icon" aria-hidden="true">🎉</div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="timeline-time">17:00</div>
+                            <h3>Festa</h3>
+                        </div>
+                        <p>Música, dança e muita animação até ao fim</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- FAQ -->
+    <section class="faq-section" aria-labelledby="faq-title">
+        <div class="faq-icon" aria-hidden="true">?</div>
+
+        <div class="faq-header">
+            <h2 id="faq-title">Perguntas frequentes</h2>
+        </div>
+
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>Posso levar acompanhante?</summary>
+                <p>O convite é pessoal. Se tiveres alguma dúvida específica, fala connosco.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Haverá estacionamento disponível?</summary>
+                <p>Sim, haverá estacionamento disponível no local para os convidados.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Qual é o dress code?</summary>
+                <p>Queremos um ambiente elegante e festivo. Em breve partilhamos mais detalhes.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Posso tirar fotografias durante a cerimónia?</summary>
+                <p>Pedimos que aproveitem o momento connosco. Durante a cerimónia, preferimos que deixem as fotografias para o fotógrafo oficial.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- GIFTS -->
+    <section class="gifts-section" aria-labelledby="gifts-title">
+        <div class="gifts-divider" aria-hidden="true">
+            <span></span>
+            <span class="gifts-star">✦</span>
+            <span></span>
+        </div>
+
+        <div class="gifts-header">
+            <h2 id="gifts-title">Presentes</h2>
+            <p>
+                A vossa presença é o mais importante para nós.
+                Se quiserem oferecer-nos algo, podem fazê-lo da forma que vos for mais cómoda.
+            </p>
+        </div>
+
+        <div class="gifts-list">
+            <details class="gifts-item">
+                <summary>Contribuição</summary>
+                <div class="gifts-content">
+                    <p>Se quiserem contribuir para a nossa nova etapa, podem fazê-lo através de transferência bancária.</p>
+
+                    <div class="gift-bank-box">
+                        <p><strong>IBAN:</strong> PT50 0000 0000 0000 0000 0000 0</p>
+                        <p><strong>Titular:</strong> Tânia & Miguel</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="gifts-divider bottom" aria-hidden="true">
+            <span></span>
+            <span class="gifts-star">✦</span>
+            <span></span>
+        </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="rsvp-section" aria-labelledby="rsvp-title">
+        <div class="rsvp-illustration">
+            <img src="assets/aliancas.png" alt="Alianças de casamento" />
+        </div>
+
+        <div class="rsvp-header">
+            <h2 id="rsvp-title">Confirma a tua presença</h2>
+            <p>Esperamos contar contigo</p>
+        </div>
+
+        <div class="rsvp-card">
+            <form class="rsvp-form" id="rsvpForm">
+                <div class="form-group">
+                    <label for="name">Nome completo <span>*</span></label>
+                    <input type="text" id="name" name="name" placeholder="O teu nome" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email (opcional)</label>
+                    <input type="email" id="email" name="email" placeholder="tu@email.com" />
+                </div>
+
+                <div class="form-group">
+                    <label>Vais estar presente? <span>*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="attendance" value="Sim, estarei presente" required />
+                            <span>Sim, estarei presente</span>
+                        </label>
+
+                        <label class="radio-option">
+                            <input type="radio" name="attendance" value="Não poderei estar presente" />
+                            <span>Não poderei estar presente</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Número de pessoas</label>
+                    <select id="guests" name="guests">
+                        <option value="">Seleciona</option>
+                        <option value="1">1 pessoa</option>
+                        <option value="2">2 pessoas</option>
+                        <option value="3">3 pessoas</option>
+                        <option value="4">4 pessoas</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Mensagem ou notas</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Alguma informação importante, alergias, restrições alimentares, etc."></textarea>
+                </div>
+
+                <button type="button" onclick="openForm()" class="rsvp-button">
+                    Confirmar presença
+                </button>
+
+                <p class="form-note">Agradecemos a confirmação até 30 de junho de 2027.</p>
+            </form>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
