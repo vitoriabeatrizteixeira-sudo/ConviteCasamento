@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tânia & Miguel | Convite de Casamento</title>
-    <meta name="description" content="Convite de casamento de Tânia e Miguel - 29 de julho de 2027" />
+    <title>Miguel &amp; Tânia | Convite de Casamento</title>
+    <meta name="description" content="Convite de casamento de Miguel e Tânia - 29 de julho de 2027" />
     <link rel="stylesheet" href="style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,331 +13,541 @@
 </head>
 <body>
 
+    <!-- INTRO -->
+    <div class="intro-overlay" id="introOverlay" aria-label="Introdução do convite">
+        <video id="introVideo"
+               class="intro-video"
+               preload="auto"
+               playsinline
+               muted>
+            <source src="assets/intro.mp4" type="video/mp4" />
+        </video>
+    </div>
+
+    <!-- SOM -->
+    <button id="sound-toggle" class="sound-btn" type="button" aria-label="Ativar ou desativar som">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 5L6 9H3v6h3l5 4V5Z" />
+            <path d="M15 9C16.5 10.5 16.5 13.5 15 15" />
+            <path d="M17.5 7C20 9.5 20 14.5 17.5 17" />
+        </svg>
+    </button>
+
+    <audio id="music" loop>
+        <source src="assets/music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- LANG -->
+    <div class="lang-switch" aria-label="Seleção de idioma">
+        <button class="lang-btn active" type="button" data-lang="pt" aria-label="Português">PT</button>
+        <button class="lang-btn" type="button" data-lang="en" aria-label="English">EN</button>
+    </div>
+
     <main>
         <!-- HERO -->
         <section class="hero" aria-label="Introdução do convite">
             <div class="overlay"></div>
 
             <div class="hero-content">
-                <p class="top-text">Vamos casar</p>
-
-                <h1 class="name first-name">Tânia</h1>
-
-                <div class="ampersand-circle" aria-hidden="true">&amp;</div>
-
-                <h2 class="name second-name">Miguel</h2>
-
-                <div class="date-line" aria-hidden="true">
-                    <span></span>
-                    <span class="star">✦</span>
-                    <span></span>
+                <div class="sub-text"
+                     data-pt="CELEBRAMOS O NOSSO AMOR"
+                     data-en="CELEBRATING OUR LOVE">
+                    CELEBRAMOS O NOSSO AMOR
                 </div>
 
-                <p class="date">
-                    <time datetime="2027-07-29">29 de julho de 2027</time>
-                </p>
+                <h1 class="name">Miguel</h1>
+                <div class="ampersand">&amp;</div>
+                <h1 class="name">Tânia</h1>
+
+                <div class="date"
+                     data-pt="29 de julho de 2027"
+                     data-en="July 29, 2027">
+                    29 de julho de 2027
+                </div>
             </div>
+
+            <a href="#RSVP" class="scroll-down">
+                <span class="text"
+                      data-pt="CONFIRMA A TUA PRESENÇA"
+                      data-en="CONFIRM YOUR ATTENDANCE">
+                    CONFIRMA A TUA PRESENÇA
+                </span>
+                <span class="arrow" aria-hidden="true">⌄</span>
+            </a>
         </section>
 
         <!-- COUNTDOWN -->
         <section class="countdown-section" aria-labelledby="countdown-title">
             <div class="countdown-container">
-                <h2 id="countdown-title">Contagem decrescente</h2>
-                <p class="subtitle">Para o dia mais feliz das nossas vidas</p>
+                <h2 class="countdown-titles" id="countdown-title"
+                    data-pt="O NOSSO DIA"
+                    data-en="OUR DAY">
+                    O NOSSO DIA
+                </h2>
+
+                <p class="countdown-subtitle"
+                   data-pt="Falta pouco para o dia mais feliz das nossas vidas!"
+                   data-en="The happiest day of our lives is almost here!">
+                    Falta pouco para o dia mais feliz das nossas vidas!
+                </p>
 
                 <div class="countdown-grid">
                     <div class="countdown-box">
-                        <span id="days">00</span>
-                        <p>Dias</p>
+                        <span class="countdown-number" id="days">00</span>
+                        <p class="countdown-text"
+                           data-pt="Dias"
+                           data-en="Days">
+                            Dias
+                        </p>
                     </div>
 
                     <div class="countdown-box">
-                        <span id="hours">00</span>
-                        <p>Horas</p>
+                        <span class="countdown-number" id="hours">00</span>
+                        <p class="countdown-text"
+                           data-pt="Horas"
+                           data-en="Hours">
+                            Horas
+                        </p>
                     </div>
 
                     <div class="countdown-box">
-                        <span id="minutes">00</span>
-                        <p>Minutos</p>
+                        <span class="countdown-number" id="minutes">00</span>
+                        <p class="countdown-text"
+                           data-pt="Minutos"
+                           data-en="Minutes">
+                            Minutos
+                        </p>
                     </div>
 
                     <div class="countdown-box">
-                        <span id="seconds">00</span>
-                        <p>Segundos</p>
+                        <span class="countdown-number" id="seconds">00</span>
+                        <p class="countdown-text"
+                           data-pt="Segundos"
+                           data-en="Seconds">
+                            Segundos
+                        </p>
                     </div>
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <img src="assets/Flor_Sep.png" alt="Elemento decorativo floral" />
+            </div>
+        </section>
+
+        <!-- WELCOME -->
+        <section class="story-section" aria-labelledby="story-title">
+            <h2 id="story-title" class="sr-only">História do casal</h2>
+
+            <div class="story-row">
+                <img src="assets/buddie.png" class="dog-decor" alt="Cão com ramo de flores" />
+
+                <p class="story-text"
+                   data-pt="Vem celebrar connosco 11 anos de história!"
+                   data-en="Come celebrate 11 years of history with us!">
+                    Vem celebrar<br>
+                    connosco 11 anos<br>
+                    de história!
+                </p>
+            </div>
+
+            <div class="photo-carousel" aria-label="Galeria de fotografias">
+                <div class="photo-track" id="photoTrack">
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+
+                    <!-- duplicadas para loop contínuo -->
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+
+                    <!-- duplicadas para loop contínuo -->
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
+                    <img src="assets/foto.jpg" alt="Miguel e Tânia" class="photo-slide" />
                 </div>
             </div>
         </section>
 
         <!-- DETAILS -->
         <section class="details-section" aria-labelledby="details-title">
-            <div class="details-header">
-                <div class="details-emoji" aria-hidden="true">🥂</div>
-                <h2 id="details-title">Detalhes do dia</h2>
-                <p>Tudo o que precisas de saber</p>
+            <div class="detail-illustration">
+                <img src="assets/aliancas.png" alt="Ilustração de champagne numa festa" />
             </div>
+
+            <h2 class="details-titles" id="details-title"
+                data-pt="Detalhes do Dia"
+                data-en="Details of the Day">
+                Detalhes do Dia
+            </h2>
+
+            <p class="details-subtitle"
+               data-pt="Tudo o que precisas de saber"
+               data-en="Everything you need to know">
+                Tudo o que precisas de saber
+            </p>
 
             <article class="details-card">
                 <div class="details-icon-circle" aria-hidden="true">📍</div>
 
-                <h3>Localização</h3>
-                <h4>Quinta Cardeal</h4>
+                <h3 class="details-h3"
+                    data-pt="Localização"
+                    data-en="Location">
+                    Localização
+                </h3>
 
-                <p class="details-time">🕒 Das 17:00 às 01:00</p>
+                <h4 class="details-h4"
+                    data-pt="Igreja Matriz de S. João Batista"
+                    data-en="Main Church of St. John the Baptist">
+                    Igreja Matriz de S. João Batista
+                </h4>
 
-                <img src="assets/quinta.jpg" alt="Vista da Quinta Cardeal" class="details-image" />
+                <h5 class="details-h5"
+                    data-pt="Vila do Conde"
+                    data-en="Vila do Conde">
+                    Vila do Conde
+                </h5>
 
-                <div class="map-box">
-                    <iframe src="https://www.google.com/maps?q=Quinta%20Cardeal&output=embed"
-                            title="Mapa da Quinta Cardeal"
-                            loading="lazy"
-                            allowfullscreen
-                            referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
 
-                <a href="https://www.google.com/maps/search/?api=1&query=Quinta+Cardeal"
+                <p class="details-time">
+                    <span class="time-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 7v5l3 2"></path>
+                        </svg>
+                    </span>
+
+                    <span data-pt="Começa às 14:30"
+                          data-en="Starts at 2:30 PM">
+                        Começa às 14:30
+                    </span>
+                </p>
+
+                <img src="assets/igreja.png" alt="Vista da igreja" class="details-image" />
+
+                <a href="https://www.google.com/maps/place/Igreja+Matriz+de+S%C3%A3o+Jo%C3%A3o+Baptista+de+Vila+do+Conde/@41.3538361,-8.7457531,17z/data=!4m6!3m5!1s0xd244404015aa37d:0xfbeec11ae1e42f4f!8m2!3d41.3539348!4d-8.7425399!16s%2Fm%2F0h7lvk9?entry=ttu&g_ep=EgoyMDI2MDQxMy4wIKXMDSoASAFQAw%3D%3D"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="details-button">
-                    <span aria-hidden="true">📍</span>
-                    Abrir no Maps
+                   class="details-button"
+                   data-pt="Abrir no Google Maps"
+                   data-en="Open in Google Maps">
+
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 21s-6-7-6-11a6 6 0 1 1 12 0c0 4-6 11-6 11z" />
+                        <circle cx="12" cy="10" r="2.5" />
+                    </svg>
+                    <span>Abrir no Google Maps</span>
                 </a>
 
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Casamento%20T%C3%A2nia%20%26%20Miguel&dates=20270729T170000/20270730T010000&details=Esperamos%20por%20ti%20no%20nosso%20grande%20dia!&location=Quinta%20Cardeal"
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Casamento%20Miguel%20%26%20T%C3%A2nia&dates=20270729T150000/20270729T170000&ctz=Europe/Lisbon&details=Esperamos%20por%20ti%20no%20nosso%20grande%20dia!&location=Igreja%20Matriz%20de%20S%C3%A3o%20Jo%C3%A3o%20Baptista%20de%20Vila%20do%20Conde"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="details-button">
-                    <span aria-hidden="true">📅</span>
-                    Adicionar ao Google Calendar
+                   class="details-button"
+                   data-pt="Adicionar ao Google Calendar"
+                   data-en="Add to Google Calendar">
+
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <rect x="4" y="5" width="16" height="15" rx="2" />
+                        <line x1="4" y1="9" x2="20" y2="9" />
+                        <line x1="8" y1="3" x2="8" y2="7" />
+                        <line x1="16" y1="3" x2="16" y2="7" />
+                    </svg>
+
+                    <span>Adicionar ao Google Calendar</span>
                 </a>
 
                 <a href="assets/casamento-tania-miguel.ics"
                    download
-                   class="details-button">
-                    <span aria-hidden="true">🍎</span>
-                    Adicionar ao Apple Calendar
+                   class="details-button"
+                   data-pt="Adicionar ao Apple Calendar"
+                   data-en="Add to Apple Calendar">
+
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+                        <line x1="4" y1="9" x2="20" y2="9"></line>
+                        <line x1="8" y1="3" x2="8" y2="7"></line>
+                        <line x1="16" y1="3" x2="16" y2="7"></line>
+                        <path d="M8 13h8"></path>
+                        <path d="M8 16h5"></path>
+                    </svg>
+
+                    <span>Adicionar ao Apple Calendar</span>
                 </a>
             </article>
         </section>
 
         <!-- SCHEDULE -->
         <section class="schedule-section" aria-labelledby="schedule-title">
-            <div class="schedule-divider" aria-hidden="true">
-                <span></span>
-                <span class="schedule-star">✦</span>
-                <span></span>
-            </div>
+            <div class="schedule-layout">
 
-            <div class="schedule-illustration">
-                <img src="assets/programa-topo.png" alt="Ilustração de convidados numa festa" />
-            </div>
+                <div class="schedule-flower-side schedule-flower-left">
+                    <img src="assets/Flor_1.png" alt="">
+                </div>
 
-            <div class="schedule-header">
-                <h2 id="schedule-title">Programa do dia</h2>
-                <p>O que preparámos para vocês</p>
-            </div>
-
-            <div class="schedule-timeline">
-                <article class="timeline-item">
-                    <div class="timeline-icon" aria-hidden="true">♡</div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div class="timeline-time">17:00</div>
-                            <h3>Chegada dos convidados</h3>
-                        </div>
-                        <p>Receção e boas-vindas na quinta</p>
+                <div class="schedule-content">
+                    <div class="schedule-illustration">
+                        <img src="assets/programa-topo.png" alt="">
                     </div>
-                </article>
 
-                <article class="timeline-item">
-                    <div class="timeline-icon" aria-hidden="true">🥂</div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div class="timeline-time">17:00</div>
-                            <h3>Welcome Drink</h3>
-                        </div>
-                        <p>Cocktail de boas-vindas enquanto aguardamos pelo início</p>
-                    </div>
-                </article>
+                    <div class="schedule-time">14:30</div>
 
-                <article class="timeline-item">
-                    <div class="timeline-icon" aria-hidden="true">💍</div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div class="timeline-time">17:00</div>
-                            <h3>Cerimónia</h3>
-                        </div>
-                        <p>O momento do “sim”</p>
-                    </div>
-                </article>
+                    <article class="schedule-item">
+                        <h3 data-pt="Cerimónia" data-en="Ceremony">Cerimónia</h3>
+                        <p data-pt="O momento do “sim”" data-en="The moment of “I do”">
+                            O momento do “sim”
+                        </p>
+                    </article>
 
-                <article class="timeline-item">
-                    <div class="timeline-icon" aria-hidden="true">🍽️</div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div class="timeline-time">17:00</div>
-                            <h3>Jantar</h3>
-                        </div>
-                        <p>Jantar servido com muita celebração à mistura</p>
-                    </div>
-                </article>
+                    <article class="schedule-item">
+                        <h3 data-pt="Cocktail" data-en="Cocktail">Cocktail</h3>
+                        <p data-pt="Aperitivos e bebidas no jardim" data-en="Drinks and appetizers in the garden">
+                            Aperitivos e bebidas no jardim
+                        </p>
+                    </article>
 
-                <article class="timeline-item">
-                    <div class="timeline-icon" aria-hidden="true">🎂</div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div class="timeline-time">17:00</div>
-                            <h3>Corte do bolo</h3>
-                        </div>
-                        <p>Um dos momentos mais doces da noite</p>
-                    </div>
-                </article>
+                    <article class="schedule-item">
+                        <h3 data-pt="Jantar" data-en="Dinner">Jantar</h3>
+                        <p data-pt="À mesa, com celebração à mistura" data-en="At the table, with celebration in the mix">
+                            À mesa, com celebração à mistura
+                        </p>
+                    </article>
 
-                <article class="timeline-item">
-                    <div class="timeline-icon" aria-hidden="true">🎉</div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div class="timeline-time">17:00</div>
-                            <h3>Festa</h3>
-                        </div>
-                        <p>Música, dança e muita animação até ao fim</p>
-                    </div>
-                </article>
+                    <article class="schedule-item">
+                        <h3 data-pt="Festa" data-en="Party">Festa</h3>
+                        <p data-pt="Música, dança e animação até ao fim" data-en="Music, dancing and celebration until 4 am">
+                            Música, dança e animação até ás 04:00
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="schedule-flower-side schedule-flower-right">
+                    <img src="assets/Flor_2.png" alt="">
+                </div>
+
             </div>
         </section>
-    </main>
 
-    <!-- FAQ -->
-    <section class="faq-section" aria-labelledby="faq-title">
-        <div class="faq-icon" aria-hidden="true">?</div>
+        <!-- FAQ -->
+        <section class="faq-section" aria-labelledby="faq-title">
 
-        <div class="faq-header">
-            <h2 id="faq-title">Perguntas frequentes</h2>
-        </div>
+            <div class="section-divider">
+                <img src="assets/Flor_Sep.png" alt="Elemento decorativo floral" />
+            </div>
 
-        <div class="faq-list">
-            <details class="faq-item">
-                <summary>Posso levar acompanhante?</summary>
-                <p>O convite é pessoal. Se tiveres alguma dúvida específica, fala connosco.</p>
-            </details>
+            <h2 class="faq-titles" id="faq-title"
+                data-pt="Perguntas frequentes"
+                data-en="Frequently Asked Questions">
+                Perguntas frequentes
+            </h2>
 
-            <details class="faq-item">
-                <summary>Haverá estacionamento disponível?</summary>
-                <p>Sim, haverá estacionamento disponível no local para os convidados.</p>
-            </details>
-
-            <details class="faq-item">
-                <summary>Qual é o dress code?</summary>
-                <p>Queremos um ambiente elegante e festivo. Em breve partilhamos mais detalhes.</p>
-            </details>
-
-            <details class="faq-item">
-                <summary>Posso tirar fotografias durante a cerimónia?</summary>
-                <p>Pedimos que aproveitem o momento connosco. Durante a cerimónia, preferimos que deixem as fotografias para o fotógrafo oficial.</p>
-            </details>
-        </div>
-    </section>
-
-    <!-- GIFTS -->
-    <section class="gifts-section" aria-labelledby="gifts-title">
-        <div class="gifts-divider" aria-hidden="true">
-            <span></span>
-            <span class="gifts-star">✦</span>
-            <span></span>
-        </div>
-
-        <div class="gifts-header">
-            <h2 id="gifts-title">Presentes</h2>
-            <p>
-                A vossa presença é o mais importante para nós.
-                Se quiserem oferecer-nos algo, podem fazê-lo da forma que vos for mais cómoda.
+            <p class="faq-subtitle"
+               data-pt="As dúvidas que podes ter"
+               data-en="Questions you may have">
+                As dúvidas que podes ter
             </p>
-        </div>
 
-        <div class="gifts-list">
-            <details class="gifts-item">
-                <summary>Contribuição</summary>
-                <div class="gifts-content">
-                    <p>Se quiserem contribuir para a nossa nova etapa, podem fazê-lo através de transferência bancária.</p>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary data-pt="Posso levar acompanhante?" data-en="Can I bring a plus one?">
+                        Posso levar acompanhante?
+                    </summary>
+                    <p data-pt="Se tiveres acompanhante incluído, isso já estará considerado no convite. Se tiveres alguma dúvida, fala connosco."
+                       data-en="If your invitation includes a plus one, that has already been taken into account. If you have any questions, talk to us.">
+                        Se tiveres acompanhante incluído, isso já estará considerado no convite. Se tiveres alguma dúvida, fala connosco.
+                    </p>
+                </details>
 
-                    <div class="gift-bank-box">
-                        <p><strong>IBAN:</strong> PT50 0000 0000 0000 0000 0000 0</p>
-                        <p><strong>Titular:</strong> Tânia & Miguel</p>
-                    </div>
-                </div>
-            </details>
-        </div>
+                <details class="faq-item">
+                    <summary data-pt="Podemos levar crianças?" data-en="Can we bring children?">
+                        Podemos levar crianças?
+                    </summary>
+                    <p data-pt="Sim. Vamos ter entretenimento para os mais pequenos, por isso estão mais do que bem-vindos."
+                       data-en="Yes. We will have entertainment for the little ones, so they are more than welcome.">
+                        Sim. Vamos ter entretenimento para os mais pequenos, por isso estão mais do que bem-vindos.
+                    </p>
+                </details>
 
-        <div class="gifts-divider bottom" aria-hidden="true">
-            <span></span>
-            <span class="gifts-star">✦</span>
-            <span></span>
-        </div>
-    </section>
+                <details class="faq-item">
+                    <summary data-pt="Haverá estacionamento disponível?" data-en="Will there be parking available?">
+                        Haverá estacionamento disponível?
+                    </summary>
+                    <p data-pt="Sim, tanto na igreja como na quinta haverá estacionamento disponível. Ainda assim, aconselhamos a virem de Uber para aproveitarem melhor a festa."
+                       data-en="Yes, there will be parking available both at the church and at the venue. Even so, we suggest coming by Uber so you can enjoy the celebration more.">
+                        Sim, tanto na igreja como na quinta haverá estacionamento disponível. Ainda assim, aconselhamos a virem de Uber para aproveitarem melhor a festa.
+                    </p>
+                </details>
 
-    <!-- RSVP -->
-    <section class="rsvp-section" aria-labelledby="rsvp-title">
-        <div class="rsvp-illustration">
-            <img src="assets/aliancas.png" alt="Alianças de casamento" />
-        </div>
+                <details class="faq-item">
+                    <summary data-pt="Qual é o dress code?" data-en="What is the dress code?">
+                        Qual é o dress code?
+                    </summary>
+                    <p data-pt="Elegante e arranjado. Deixamos o fato de treino e os equipamentos de vólei para outro dia 😄"
+                       data-en="Elegant and polished. We will leave the tracksuits and volleyball gear for another day 😄">
+                        Elegante e arranjado. Deixamos o fato de treino e os equipamentos de vólei para outro dia 😄
+                    </p>
+                </details>
 
-        <div class="rsvp-header">
-            <h2 id="rsvp-title">Confirma a tua presença</h2>
-            <p>Esperamos contar contigo</p>
-        </div>
+                <details class="faq-item">
+                    <summary data-pt="A que horas devo chegar?" data-en="What time should I arrive?">
+                        A que horas devo chegar?
+                    </summary>
+                    <p data-pt="O ideal é chegar um bocadinho antes para começarmos todos juntos… e nunca mais tarde que a Tânia."
+                       data-en="Ideally, arrive a little earlier so we can all begin together… and never later than Tânia.">
+                        O ideal é chegar um bocadinho antes para começarmos todos juntos… e nunca mais tarde que a Tânia.
+                    </p>
+                </details>
 
-        <div class="rsvp-card">
-            <form class="rsvp-form" id="rsvpForm">
-                <div class="form-group">
-                    <label for="name">Nome completo <span>*</span></label>
-                    <input type="text" id="name" name="name" placeholder="O teu nome" required />
-                </div>
+                <details class="faq-item">
+                    <summary data-pt="Posso tirar fotografias durante a cerimónia?" data-en="Can I take photos during the ceremony?">
+                        Posso tirar fotografias durante a cerimónia?
+                    </summary>
+                    <p data-pt="Durante a cerimónia, principalmente na entrada da noiva, preferimos que deixem as fotografias para o fotógrafo oficial."
+                       data-en="During the ceremony, especially the bride's entrance, we would prefer you to leave the photos to the official photographer.">
+                        Durante a cerimónia, principalmente na entrada da noiva, preferimos que deixem as fotografias para o fotógrafo oficial.
+                    </p>
+                </details>
+            </div>
+        </section>
 
-                <div class="form-group">
-                    <label for="email">Email (opcional)</label>
-                    <input type="email" id="email" name="email" placeholder="tu@email.com" />
-                </div>
+        <!-- RSVP -->
+        <section class="rsvp-section" aria-labelledby="rsvp-title" id="RSVP">
+            <div class="rsvp-illustration">
+                <img src="assets/convite.png" alt="Alianças de casamento" />
+            </div>
 
-                <div class="form-group">
-                    <label>Vais estar presente? <span>*</span></label>
-                    <div class="radio-group">
+            <p class="rsvp-titles"
+               data-pt="Confirma a tua presença"
+               data-en="Confirm your attendance">
+                Confirma a tua presença
+            </p>
+
+
+            <p class="rsvp-subtitle"
+               data-pt="Esperamos contar contigo"
+               data-en="We hope to celebrate with you">
+                Esperamos contar contigo
+            </p>
+
+            <div class="rsvp-card">
+
+                <form class="rsvp-form" id="rsvpForm">
+
+                    <fieldset class="form-group">
+                        <legend data-pt="Vais estar presente? *" data-en="Will you be attending? *">
+                            Vais estar presente? *
+                        </legend>
+
                         <label class="radio-option">
-                            <input type="radio" name="attendance" value="Sim, estarei presente" required />
-                            <span>Sim, estarei presente</span>
+                            <input type="radio" name="attendance" value="yes" required>
+                            <span data-pt="Sim, estarei presente" data-en="Yes, I’ll be there">
+                                Sim, estarei presente
+                            </span>
                         </label>
 
                         <label class="radio-option">
-                            <input type="radio" name="attendance" value="Não poderei estar presente" />
-                            <span>Não poderei estar presente</span>
+                            <input type="radio" name="attendance" value="no">
+                            <span data-pt="Infelizmente, não poderei ir" data-en="Unfortunately, I can’t make it">
+                                Infelizmente, não poderei ir
+                            </span>
                         </label>
+                    </fieldset>
+
+                    <div class="form-group">
+                        <div data-pt="Quantos convidados no total?" data-en="How many guests in total?">
+                            Quantos convidados no total?
+                        </div>
+
+                        <div class="guest-counter">
+                            <button type="button" class="counter-btn minus">−</button>
+                            <span id="guestCount">1</span>
+                            <button type="button" class="counter-btn plus">+</button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="guests">Número de pessoas</label>
-                    <select id="guests" name="guests">
-                        <option value="">Seleciona</option>
-                        <option value="1">1 pessoa</option>
-                        <option value="2">2 pessoas</option>
-                        <option value="3">3 pessoas</option>
-                        <option value="4">4 pessoas</option>
-                    </select>
-                </div>
+                    <div class="guest-card" id="guestsContainer">
+                        <p class="guest-title" data-pt="Convidado 1 (contacto principal)" data-en="Guest 1 (Main contact)">
+                            Convidado 1 (contacto principal)
+                        </p>
 
-                <div class="form-group">
-                    <label for="message">Mensagem ou notas</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Alguma informação importante, alergias, restrições alimentares, etc."></textarea>
-                </div>
+                        <input type="text"
+                               name="name"
+                               placeholder="O teu nome"
+                               data-pt-placeholder="O teu nome"
+                               data-en-placeholder="Full name"
+                               required>
 
-                <button type="button" onclick="openForm()" class="rsvp-button">
-                    Confirmar presença
-                </button>
+                        <div class="diet-group">
+                            <p class="small-label"
+                               data-pt="Restrições alimentares"
+                               data-en="Dietary requirements">
+                                Restrições alimentares
+                            </p>
 
-                <p class="form-note">Agradecemos a confirmação até 30 de junho de 2027.</p>
-            </form>
-        </div>
-    </section>
+                            <div class="diet-options">
+                                <label class="diet-option">
+                                    <input type="radio" name="diet" value="none" checked>
+                                    <span data-pt="Sem restrições" data-en="No restrictions">Sem restrições</span>
+                                </label>
+
+                                <label class="diet-option">
+                                    <input type="radio" name="diet" value="vegetarian">
+                                    <span data-pt="Vegetariano" data-en="Vegetarian">Vegetariano</span>
+                                </label>
+
+                                <label class="diet-option">
+                                    <input type="radio" name="diet" value="vegan">
+                                    <span data-pt="Vegan" data-en="Vegan">Vegan</span>
+                                </label>
+                            </div>
+
+                            <input type="text"
+                                   name="allergies"
+                                   class="diet-input"
+                                   placeholder="Ex.: alergia a frutos secos, marisco..."
+                                   data-pt-placeholder="Ex.: alergia a frutos secos, marisco..."
+                                   data-en-placeholder="e.g. nut allergy, shellfish...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" data-pt="Mensagem para os noivos" data-en="Message for the couple">
+                            Mensagem para os noivos
+                        </label>
+
+                        <textarea name="message"
+                                  placeholder="Há alguma coisa que nos queiras dizer?"
+                                  data-pt-placeholder="Há alguma coisa que nos queiras dizer?"
+                                  data-en-placeholder="Is there anything you’d like to tell us?"></textarea>
+                    </div>
+
+                    <button type="submit" class="rsvp-submit"
+                            data-pt="Confirmar presença"
+                            data-en="Confirm RSVP">
+                        Confirmar presença
+                    </button>
+
+                </form>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <section class="footer-section">
+            <div class="footer-heart" aria-hidden="true">♡</div>
+
+            <h2 class="footer-names">Miguel &amp; Tânia</h2>
+
+            <p class="footer-date"
+               data-pt="29 de julho de 2027"
+               data-en="July 29, 2027">
+                29 de julho de 2027
+            </p>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
