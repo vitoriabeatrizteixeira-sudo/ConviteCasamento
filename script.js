@@ -1,78 +1,202 @@
-const targetDate = new Date("2027-07-29T15:00:00").getTime();
+const RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzNAhYqU9w5kDTGzXMez8fgmLSvyoGPO_XgTmxkgzIcl-xLFC0DAH-GweEYPLN5ZVerNA/exec";
 
-function updateCountdown() {
-    const now = Date.now();
-    const distance = targetDate - now;
+const ATTENDANCE_LABELS = {
+    yes: "Sim",
+    no: "Não"
+};
 
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
+const DIET_LABELS = {
+    none: "Sem restrições",
+    vegetarian: "Vegetariano",
+    vegan: "Vegan"
+};
 
-    if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+const FORM_COPY = {
+    pt: {
+        attendance: "Conta-nos se vais poder estar presente.",
+        mainName: "Escreve o nome do contacto principal.",
+        guestName: number => `Escreve o nome do convidado ${number}.`,
+        success: "Presença confirmada. Obrigado por celebrares connosco.",
+        sendError: "Não foi possível enviar a confirmação. Tenta novamente."
+    },
+    en: {
+        attendance: "Let us know if you will be able to attend.",
+        mainName: "Enter the main contact's name.",
+        guestName: number => `Enter the name of guest ${number}.`,
+        success: "RSVP confirmed. Thank you for celebrating with us.",
+        sendError: "We could not send your RSVP. Please try again."
+    }
+};
 
-    if (distance <= 0) {
-        daysEl.innerText = "0";
-        hoursEl.innerText = "0";
-        minutesEl.innerText = "0";
-        secondsEl.innerText = "0";
+function getActiveLanguage() {
+    return document.querySelector(".lang-btn.active")?.dataset.lang || "pt";
+}
+
+async function openForm(event) {
+    event.preventDefault();
+
+    const formEl = document.getElementById("rsvpForm");
+    const guestCards = document.querySelectorAll("#guestsContainer > .guest-card");
+    const attendanceEl = document.querySelector('input[name="attendance"]:checked');
+    const guestCountEl = document.getElementById("guestCount");
+    const messageEl = formEl ? formEl.querySelector('textarea[name="message"]') : null;
+    const submitButton = formEl ? formEl.querySelector('button[type="submit"]') : null;
+
+    if (!formEl) return;
+
+    const copy = FORM_COPY[getActiveLanguage()];
+
+    clearFormErrors(formEl);
+    clearFormStatus(formEl);
+
+    if (!attendanceEl) {
+        showFormError(
+            formEl.querySelector('fieldset'),
+            copy.attendance,
+            formEl.querySelector('input[name="attendance"]')
+        );
         return;
     }
 
-    daysEl.innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-    hoursEl.innerText = Math.floor((distance / (1000 * 60 * 60)) % 24);
-    minutesEl.innerText = Math.floor((distance / (1000 * 60)) % 60);
-    secondsEl.innerText = Math.floor((distance / 1000) % 60);
-}
+    const guests = [];
 
-function openForm() {
-    const nameEl = document.getElementById("name");
-    const emailEl = document.getElementById("email");
-    const guestsEl = document.getElementById("guests");
-    const messageEl = document.getElementById("message");
-    const formEl = document.getElementById("rsvpForm");
-    const attendanceEl = document.querySelector('input[name="attendance"]:checked');
+    guestCards.forEach((card, index) => {
+        const guestNumber = index + 1;
 
-    const name = nameEl ? nameEl.value.trim() : "";
-    const email = emailEl ? emailEl.value.trim() : "";
-    const guests = guestsEl ? guestsEl.value : "";
+        const nameEl = card.querySelector(`input[name="name_${guestNumber}"]`);
+        const dietEl = card.querySelector(`input[name="diet_${guestNumber}"]:checked`);
+        const allergiesEl = card.querySelector(`input[name="allergies_${guestNumber}"]`);
+
+        guests.push({
+            guestNumber,
+            name: nameEl ? nameEl.value.trim() : "",
+            restrictions: dietEl ? DIET_LABELS[dietEl.value] : "",
+            allergies: allergiesEl ? allergiesEl.value.trim() : ""
+        });
+    });
+
+    const mainGuest = guests[0];
+
+    if (!mainGuest || !mainGuest.name) {
+        const firstNameInput = guestCards[0].querySelector('input[type="text"]');
+        showFormError(
+            firstNameInput,
+            copy.mainName,
+            firstNameInput
+        );
+        return;
+    }
+
+    const invalidGuestIndex = guests.findIndex(guest => !guest.name);
+
+    if (invalidGuestIndex !== -1) {
+        const invalidNameInput = guestCards[invalidGuestIndex].querySelector('input[type="text"]');
+        showFormError(
+            invalidNameInput,
+            copy.guestName(invalidGuestIndex + 1),
+            invalidNameInput
+        );
+        return;
+    }
+
+    const attendance = ATTENDANCE_LABELS[attendanceEl.value];
+    const nrguests = Number(guestCountEl.textContent);
     const message = messageEl ? messageEl.value.trim() : "";
 
-    if (!name || !attendanceEl) {
-        alert("Preenche pelo menos o nome e a presença.");
-        return;
-    }
-
     const data = {
-        name,
-        email,
-        attendance: attendanceEl.value,
-        guests,
-        message
+        rows: guests.map(guest => ({
+            attendance,
+            name: guest.name,
+            nrguests,
+            restrictions: guest.restrictions,
+            allergies: guest.allergies,
+            message,
+            mainname: mainGuest.name
+        }))
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbzNAhYqU9w5kDTGzXMez8fgmLSvyoGPO_XgTmxkgzIcl-xLFC0DAH-GweEYPLN5ZVerNA/exec", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => {
-            if (!response.ok) throw new Error("Erro no envio");
-            return response.text();
-        })
-        .then(() => {
-            alert("Presença confirmada com sucesso 💛");
-            if (formEl) formEl.reset();
-        })
-        .catch(error => {
-            console.error("Erro ao enviar:", error);
-            alert("Erro ao enviar. Tenta novamente.");
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+        const response = await fetch(RSVP_ENDPOINT, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(data)
         });
+
+        if (!response.ok) {
+            throw new Error(`Erro no envio: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.result !== "success") {
+            throw new Error("Resposta inesperada do servidor");
+        }
+
+        formEl.reset();
+        showFormStatus(formEl, copy.success, "success");
+    } catch (error) {
+        console.error("Erro ao enviar:", error);
+        showFormStatus(formEl, copy.sendError, "error");
+    } finally {
+        if (submitButton) submitButton.disabled = false;
+    }
 }
 
+function clearFormErrors(formEl) {
+    formEl.querySelectorAll(".form-error").forEach(error => error.remove());
+    formEl.querySelectorAll(".has-error").forEach(element => {
+        element.classList.remove("has-error");
+        element.removeAttribute("aria-invalid");
+    });
+}
+
+function clearFormStatus(formEl) {
+    formEl.querySelectorAll(".form-status").forEach(status => status.remove());
+}
+
+function showFormStatus(formEl, message, type) {
+    clearFormStatus(formEl);
+
+    const statusEl = document.createElement("p");
+    statusEl.className = `form-status form-status--${type}`;
+    statusEl.setAttribute("role", "status");
+    statusEl.textContent = message;
+    formEl.appendChild(statusEl);
+    statusEl.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function showFormError(anchorEl, message, focusEl) {
+    if (!anchorEl) return;
+
+    const errorEl = document.createElement("p");
+    errorEl.className = "form-error";
+    errorEl.textContent = message;
+
+    anchorEl.classList.add("has-error");
+    anchorEl.setAttribute("aria-invalid", "true");
+    anchorEl.insertAdjacentElement("afterend", errorEl);
+
+    if (focusEl) focusEl.focus({ preventScroll: true });
+    anchorEl.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
+    const rsvpForm = document.getElementById("rsvpForm");
+    if (rsvpForm) {
+        rsvpForm.addEventListener("submit", openForm);
+        rsvpForm.addEventListener("input", event => {
+            if (!event.target.matches("input, textarea")) return;
+            clearFormErrors(rsvpForm);
+            clearFormStatus(rsvpForm);
+        });
+    }
+
     const introOverlay = document.getElementById("introOverlay");
     const introVideo = document.getElementById("introVideo");
     const music = document.getElementById("music");
@@ -224,10 +348,37 @@ document.addEventListener("DOMContentLoaded", () => {
         buttons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
 
+        // Texto normal
         document.querySelectorAll("[data-pt]").forEach(el => {
             if (el.dataset[lang]) {
                 el.textContent = el.dataset[lang];
             }
+        });
+
+        // Placeholders (INPUTS)
+        document.querySelectorAll("[data-pt-placeholder]").forEach(el => {
+            const key = `${lang}Placeholder`;
+            if (el.dataset[key]) {
+                el.placeholder = el.dataset[key];
+            }
+        });
+    }
+
+    function updateCountdown() {
+        const weddingDate = new Date("2027-07-29T14:30:00+01:00");
+        const remainingTime = Math.max(0, weddingDate.getTime() - Date.now());
+        const totalSeconds = Math.floor(remainingTime / 1000);
+
+        const values = {
+            days: Math.floor(totalSeconds / 86400),
+            hours: Math.floor((totalSeconds % 86400) / 3600),
+            minutes: Math.floor((totalSeconds % 3600) / 60),
+            seconds: totalSeconds % 60
+        };
+
+        Object.entries(values).forEach(([id, value]) => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = String(value).padStart(2, "0");
         });
     }
 
@@ -381,48 +532,80 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let guestCount = Number(guestCountEl.textContent) || 1;
 
+    function getCurrentLang() {
+        const activeBtn = document.querySelector(".lang-btn.active");
+        return activeBtn ? activeBtn.dataset.lang : "pt";
+    }
+
+    function applyLanguage(lang) {
+        document.querySelectorAll("[data-pt][data-en]").forEach(el => {
+            if (el.dataset[lang]) {
+                el.textContent = el.dataset[lang];
+            }
+        });
+
+        document.querySelectorAll("[data-pt-placeholder][data-en-placeholder]").forEach(el => {
+            const key = `${lang}Placeholder`;
+            if (el.dataset[key]) {
+                el.placeholder = el.dataset[key];
+            }
+        });
+    }
+
     function createGuest(index) {
         return `
             <div class="guest-card">
-                <p class="guest-title">
+                <p class="guest-title"
+                   data-pt="Convidado ${index}${index === 1 ? " (contacto principal)" : ""}"
+                   data-en="Guest ${index}${index === 1 ? " (main contact)" : ""}">
                     Convidado ${index}${index === 1 ? " (contacto principal)" : ""}
                 </p>
 
                 <input type="text"
                        name="name_${index}"
                        placeholder="O teu nome"
+                       data-pt-placeholder="O teu nome"
+                       data-en-placeholder="Full name"
                        required>
 
                 <div class="diet-group">
-                    <p class="small-label">Restrições alimentares</p>
+                    <p class="small-label"
+                       data-pt="Preferência alimentar"
+                       data-en="Dietary preference">
+                        Preferência alimentar
+                    </p>
 
                     <div class="diet-options">
                         <label class="diet-option">
                             <input type="radio" name="diet_${index}" value="none" checked>
-                            <span>Sem restrições</span>
+                            <span data-pt="Sem restrições" data-en="No restrictions">Sem restrições</span>
                         </label>
 
                         <label class="diet-option">
                             <input type="radio" name="diet_${index}" value="vegetarian">
-                            <span>Vegetariano</span>
+                            <span data-pt="Vegetariano" data-en="Vegetarian">Vegetariano</span>
                         </label>
 
                         <label class="diet-option">
                             <input type="radio" name="diet_${index}" value="vegan">
-                            <span>Vegan</span>
+                            <span data-pt="Vegan" data-en="Vegan">Vegan</span>
                         </label>
                     </div>
 
                     <input type="text"
                            name="allergies_${index}"
                            class="diet-input"
-                           placeholder="Ex.: alergia a frutos secos, marisco...">
+                           placeholder="Alergias ou intolerâncias (se aplicável)"
+                           data-pt-placeholder="Alergias ou intolerâncias (se aplicável)"
+                           data-en-placeholder="Allergies or intolerances (if applicable)">
                 </div>
             </div>
         `;
     }
 
     function renderGuests() {
+        const lang = getCurrentLang();
+
         guestCountEl.textContent = guestCount;
         guestsContainer.innerHTML = "";
 
@@ -432,6 +615,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         minusBtn.disabled = guestCount === 1;
         plusBtn.disabled = guestCount === 5;
+
+        applyLanguage(lang);
     }
 
     minusBtn.addEventListener("click", () => {
@@ -447,6 +632,14 @@ document.addEventListener("DOMContentLoaded", () => {
             renderGuests();
         }
     });
+
+    const rsvpForm = document.getElementById("rsvpForm");
+    if (rsvpForm) {
+        rsvpForm.addEventListener("reset", () => {
+            guestCount = 1;
+            setTimeout(renderGuests, 0);
+        });
+    }
 
     renderGuests();
 });
