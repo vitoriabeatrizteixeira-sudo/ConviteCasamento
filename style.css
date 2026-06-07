@@ -23,9 +23,27 @@ body {
     line-height: 1.4;
 }
 
+button,
+input,
+textarea {
+    font: inherit;
+}
+
 img {
     max-width: 100%;
     display: block;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+summary,
+label,
+span {
+    overflow-wrap: break-word;
 }
 
 main {
@@ -335,7 +353,7 @@ main {
     font-weight: 500;
     color: #4f5a46;
     margin-bottom: 10px;
-    font-size: 2.6rem;
+    font-size: clamp(2.1rem, 7vw, 2.6rem);
     letter-spacing: 0.02em;
 }
 
@@ -356,8 +374,8 @@ main {
     background: #f5f2ec;
     border-radius: 10px;
     padding: 14px 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 5px 16px rgba(79, 90, 70, 0.06);
+    border: 1px solid rgba(79, 90, 70, 0.08);
 }
 
 .countdown-number {
@@ -440,7 +458,7 @@ main {
     display: flex;
     gap: 14px;
     width: max-content;
-    animation: scrollCarousel 45s linear infinite;
+    animation: scrollCarousel 60s linear infinite;
 }
 
 .photo-slide {
@@ -510,7 +528,7 @@ main {
     max-width: 700px;
     margin: 0 auto;
     color: #4f5a46;
-    font-size: 2.5rem;
+    font-size: clamp(2.1rem, 7vw, 2.5rem);
     font-weight: 500;
     margin-top: 10px;
 }
@@ -812,7 +830,7 @@ main {
     max-width: 700px;
     margin: 0 auto;
     color: #4f5a46;
-    font-size: 2.5rem;
+    font-size: clamp(2.1rem, 7vw, 2.5rem);
     font-weight: 500;
 }
 
@@ -919,7 +937,7 @@ main {
     max-width: 700px;
     margin: 10px auto 8px auto;
     color: #4f5a46;
-    font-size: 2.5rem;
+    font-size: clamp(2.1rem, 7vw, 2.5rem);
     font-weight: 500;
 }
 
@@ -995,6 +1013,7 @@ main {
         height: 16px;
         margin: 3px 0 0;
         padding: 0;
+        accent-color: #6f7d5c;
     }
 
 .checkbox-row label {
@@ -1007,18 +1026,22 @@ main {
     color: #6f685f;
 }
 
-input,
+input[type="text"],
 textarea {
     width: 100%;
     border: 1px solid rgba(79, 90, 70, 0.14);
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.72);
+    background-color: rgba(255, 255, 255, 0.78);
     padding: 14px 16px;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.05rem;
     color: #4f5a46;
+    caret-color: #6f7d5c;
+    color-scheme: light;
     outline: none;
     margin-bottom: 14px;
+    box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.01);
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 textarea {
@@ -1026,11 +1049,73 @@ textarea {
     resize: vertical;
 }
 
-    input:focus,
+    input[type="text"]:focus,
     textarea:focus {
-        border-color: rgba(79, 90, 70, 0.4);
-        background: #fbf8f2;
+        border-color: rgba(111, 125, 92, 0.58);
+        background-color: #fffdf9;
+        box-shadow: 0 0 0 3px rgba(111, 125, 92, 0.10);
     }
+
+input[type="text"]:-webkit-autofill,
+input[type="text"]:-webkit-autofill:hover,
+input[type="text"]:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: #4f5a46;
+    -webkit-box-shadow: 0 0 0 1000px #fffdf9 inset;
+    caret-color: #6f7d5c;
+}
+
+.form-error {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: -5px 0 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    line-height: 1.3;
+    color: #9a6252;
+}
+
+    .form-error::before {
+        content: "♡";
+        font-size: 0.9rem;
+        color: #9a6252;
+    }
+
+fieldset.has-error {
+    border: none;
+    background: transparent;
+}
+
+input[type="text"].has-error {
+    border-color: rgba(154, 98, 82, 0.55);
+    background-color: #fffaf7;
+    box-shadow: 0 0 0 3px rgba(154, 98, 82, 0.08);
+}
+
+.form-status {
+    margin: 14px 0 0;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.form-status--success {
+    color: #526047;
+    border: 1px solid rgba(111, 125, 92, 0.24);
+    background: rgba(111, 125, 92, 0.08);
+}
+
+.form-status--error {
+    color: #8a594b;
+    border: 1px solid rgba(154, 98, 82, 0.24);
+    background: rgba(154, 98, 82, 0.07);
+}
 
 .guest-counter {
     display: flex;
@@ -1145,6 +1230,7 @@ textarea {
         padding: 0;
         flex-shrink: 0;
         margin-top: 8px;
+        accent-color: #6f7d5c;
     }
 
 .diet-input {
@@ -1162,12 +1248,27 @@ textarea {
     color: #ffffff;
     border: 1px solid rgba(79, 90, 70, 0.18);
     margin-top: 8px;
+    transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
 }
 
     .rsvp-submit:hover {
         background: #6f7b5f;
         color: #fff;
+        transform: translateY(-1px);
+    }
 
+    .rsvp-submit:disabled {
+        cursor: wait;
+        opacity: 0.65;
+        transform: none;
+    }
+
+    .rsvp-submit:focus-visible,
+    .counter-btn:focus-visible,
+    .details-button:focus-visible,
+    .faq-item summary:focus-visible {
+        outline: 2px solid rgba(111, 125, 92, 0.62);
+        outline-offset: 3px;
     }
 
 .form-note {
@@ -1216,4 +1317,214 @@ textarea {
     .footer-credit span {
         color: #c7b36a;
     }
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (min-width: 768px) {
+    .hero {
+        min-height: 100dvh;
+    }
+
+    .countdown-section,
+    .details-section,
+    .faq-section,
+    .rsvp-section {
+        padding-left: clamp(28px, 6vw, 72px);
+        padding-right: clamp(28px, 6vw, 72px);
+    }
+
+    .countdown-grid {
+        gap: 20px;
+    }
+
+    .countdown-box {
+        padding: 20px 16px;
+    }
+
+    .story-row {
+        max-width: 540px;
+    }
+
+    .story-text {
+        max-width: 220px;
+    }
+
+    .rsvp-card {
+        padding: 28px 36px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .hero-content {
+        max-width: 860px;
+    }
+
+    .name {
+        font-size: 5.8rem;
+    }
+
+    .countdown-container,
+    .details-card,
+    .faq-list,
+    .rsvp-card {
+        width: min(100%, 760px);
+    }
+
+    .photo-slide {
+        width: 270px;
+        height: 360px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero {
+        min-height: 100svh;
+        min-height: 100dvh;
+    }
+
+    .hero-content {
+        padding-inline: 14px;
+    }
+
+    .countdown-section {
+        padding-top: 48px;
+    }
+
+    .countdown-grid {
+        gap: 10px;
+    }
+
+    .countdown-box {
+        padding: 13px 7px;
+    }
+
+    .countdown-number {
+        font-size: clamp(1.35rem, 6vw, 1.75rem);
+    }
+
+    .countdown-text {
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+    }
+
+    .story-row {
+        padding-inline: 16px;
+    }
+
+    .dog-decor {
+        width: min(34vw, 130px);
+        margin-left: 0;
+    }
+
+    .story-text {
+        font-size: clamp(1.08rem, 5vw, 1.3rem);
+    }
+
+    .details-card,
+    .rsvp-card {
+        padding: 24px 18px;
+    }
+
+    .rsvp-form {
+        padding: 18px 4px;
+    }
+
+    .details-button,
+    .rsvp-submit,
+    .counter-btn {
+        min-height: 44px;
+    }
+
+    .faq-item summary {
+        padding: 16px 18px;
+    }
+
+    .faq-item p {
+        padding: 6px 18px 18px;
+    }
+
+    .sound-btn {
+        right: 12px;
+        bottom: max(12px, env(safe-area-inset-bottom));
+        width: 48px;
+        height: 48px;
+    }
+
+    .lang-switch {
+        top: max(12px, env(safe-area-inset-top));
+        right: 12px;
+    }
+}
+
+@media (max-width: 359px) {
+    .countdown-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .countdown-subtitle {
+        margin-bottom: 26px;
+    }
+
+    .scroll-down .text {
+        font-size: 0.64rem;
+        letter-spacing: 0.14em;
+    }
+
+    .details-section,
+    .faq-section,
+    .rsvp-section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .schedule-flower-side {
+        opacity: 0.5;
+    }
+}
+
+@media (max-height: 540px) and (orientation: landscape) {
+    .hero-content {
+        padding-bottom: 54px;
+        transform: none;
+    }
+
+    .sub-text {
+        margin-top: 8px;
+    }
+
+    .name {
+        font-size: clamp(2.7rem, 12vh, 4rem);
+    }
+
+    .scroll-down {
+        bottom: 10px;
+    }
+
+    .intro-overlay::after {
+        bottom: 18px;
+    }
+}
+
+@media (hover: none) {
+    .details-button:hover,
+    .rsvp-submit:hover,
+    .sound-btn:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
 
