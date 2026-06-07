@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Convite Casamento//PT
+CALSCALE:GREGORIAN
+
+BEGIN:VEVENT
+UID:casamento-tania-miguel-20270729@convite.com
+DTSTAMP:20260607T120000Z
+
+DTSTART;TZID=Europe/Lisbon:20270729T143000
+DTEND;TZID=Europe/Lisbon:20270729T163000
+
+SUMMARY:Casamento Miguel & Tânia
+DESCRIPTION:Esperamos por ti no nosso grande dia!
+LOCATION:Igreja Matriz de São João Baptista de Vila do Conde
+
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Lembrete: casamento amanhã
+END:VALARM
+
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:Lembrete: casamento daqui a 1 hora
+END:VALARM
+
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Lembrete: casamento em 15 minutos
+END:VALARM
+
+END:VEVENT
+END:VCALENDAR
