@@ -16,14 +16,14 @@ const FORM_COPY = {
         attendance: "Conta-nos se vais poder estar presente.",
         mainName: "Escreve o nome do contacto principal.",
         guestName: number => `Escreve o nome do convidado ${number}.`,
-        success: "Presença confirmada. Obrigado por celebrares connosco.",
+        success: "Resposta submetida com sucesso. Obrigado!",
         sendError: "Não foi possível enviar a confirmação. Tenta novamente."
     },
     en: {
         attendance: "Let us know if you will be able to attend.",
         mainName: "Enter the main contact's name.",
         guestName: number => `Enter the name of guest ${number}.`,
-        success: "RSVP confirmed. Thank you for celebrating with us.",
+        success: "RSVP confirmed.",
         sendError: "We could not send your RSVP. Please try again."
     }
 };
